@@ -18,6 +18,7 @@ public class TrainingScreen extends BaseScreen {
         Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        viewport.apply();
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         game.font.draw(batch, "Training Area (WIP)", 350, 300);
