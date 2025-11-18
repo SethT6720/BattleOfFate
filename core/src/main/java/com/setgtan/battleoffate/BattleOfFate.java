@@ -1,32 +1,23 @@
 package com.setgtan.battleoffate;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.setgtan.battleoffate.screens.MainMenuScreen;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
-public class BattleOfFate extends ApplicationAdapter {
-    private SpriteBatch batch;
-    private Texture image;
+public class BattleOfFate extends Game {
+
+    public BitmapFont font;
 
     @Override
     public void create() {
-        batch = new SpriteBatch();
-        image = new Texture("libgdx.png");
-    }
-
-    @Override
-    public void render() {
-        ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
-        batch.begin();
-        batch.draw(image, 140, 210);
-        batch.end();
+        font = new BitmapFont();
+        setScreen(new MainMenuScreen(this));
     }
 
     @Override
     public void dispose() {
-        batch.dispose();
-        image.dispose();
+        font.dispose();
+        super.dispose();
     }
 }
