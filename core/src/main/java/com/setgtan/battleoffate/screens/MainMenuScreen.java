@@ -4,38 +4,57 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.Align;
 import com.setgtan.battleoffate.BattleOfFate;
 
 public class MainMenuScreen extends BaseScreen {
 
     private BattleOfFate game;
-    private GlyphLayout layout = new GlyphLayout();
 
     public MainMenuScreen(BattleOfFate game) {
         this.game = game;
+
+        Label.LabelStyle titleStyle = new Label.LabelStyle();
+        titleStyle.font = game.font;
+
+        Label title = new Label("Battle Of Fate", titleStyle);
+        title.setFontScale(2.2f);
+        title.setAlignment(Align.center);
+
+
+        TextButton startButton = new TextButton("Start Training", skin);
+        TextButton settingsButton = new TextButton("Settings", skin);
+        TextButton quitButton = new TextButton("Quit", skin);
+
+        startButton.addListener(event -> {
+           if (startButton.isPressed()) {
+               game.setScreen(new TrainingScreen(game));
+           }
+           return false;
+        });
+
+        quitButton.addListener(event -> {
+            if (quitButton.isPressed()) {
+                Gdx.app.exit();
+            }
+            return false;
+        });
+
+        table.add(title).padBottom(40).row();
+        table.add(startButton).width(300).height(60).padBottom(15).row();
+        table.add(settingsButton).width(300).height(60).padBottom(15).row();
+        table.add(quitButton).width(300).height(60);
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0.2f, 1);
+        Gdx.gl.glClearColor(0f, 0f, 0.15f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        viewport.apply();
-        batch.setProjectionMatrix(camera.combined);
-        batch.begin();
-
-        String title = "Battle Of Fate";
-        layout.setText(game.font, title);
-
-        float x = (1280 - layout.width) / 2;
-        float y = 500;
-
-        game.font.draw(batch, title, x, y);
-        game.font.draw(batch, "Press ENTER to start training", 300, 200);
-        batch.end();
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-            game.setScreen(new TrainingScreen(game));
-        }
+        stage.act(delta);
+        stage.draw();
     }
+
 }

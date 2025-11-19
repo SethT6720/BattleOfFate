@@ -32,6 +32,8 @@ public abstract class BaseScreen implements Screen {
         skin = new Skin(Gdx.files.internal("uiskin.json"));
 
         table = new Table();
+        table.setFillParent(true);
+        stage.addActor(table);
     }
 
     @Override
