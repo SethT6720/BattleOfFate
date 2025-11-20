@@ -23,6 +23,8 @@ public abstract class BaseScreen implements Screen {
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
         viewport = new FitViewport(1280, 720, camera);
+
+        //camera.position puts it in the center of the screen
         camera.position.set(1280 / 2f, 720 / 2f, 0);
         camera.update();
 

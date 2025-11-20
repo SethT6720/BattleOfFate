@@ -27,6 +27,7 @@ public class MainMenuScreen extends BaseScreen {
         TextButton startButton = new TextButton("Start Training", skin);
         TextButton settingsButton = new TextButton("Settings", skin);
         TextButton quitButton = new TextButton("Quit", skin);
+        TextButton mapButton = new TextButton("Map", skin);
 
         startButton.addListener(event -> {
            if (startButton.isPressed()) {
@@ -34,6 +35,14 @@ public class MainMenuScreen extends BaseScreen {
            }
            return false;
         });
+
+        mapButton.addListener(event -> {
+            if (mapButton.isPressed()) {
+                game.setScreen(new MapScreen(game));
+            }
+            return false;
+        });
+
 
         quitButton.addListener(event -> {
             if (quitButton.isPressed()) {
@@ -44,6 +53,7 @@ public class MainMenuScreen extends BaseScreen {
 
         table.add(title).padBottom(40).row();
         table.add(startButton).width(300).height(60).padBottom(15).row();
+        table.add(mapButton).width(300).height(60).padBottom(15).row();
         table.add(settingsButton).width(300).height(60).padBottom(15).row();
         table.add(quitButton).width(300).height(60);
     }
